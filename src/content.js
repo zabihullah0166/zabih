@@ -19,6 +19,7 @@ export const personalInfo = {
   },
   typewriterWords: [
     "AI & Agentic Systems Engineer",
+    ".NET & C# Developer",
     "Python & FastAPI Developer",
     "RAG & Vector Search Specialist",
     "Multi-Modal Voice Agent Builder",
@@ -55,10 +56,14 @@ export const skillsData = [
   // Backend
   { name: "Python", category: "backend", icon: "fab fa-python", level: 98 },
   { name: "FastAPI", category: "backend", icon: "fas fa-bolt", level: 92 },
+  { name: "C# & .NET Core", category: "backend", icon: "fas fa-code", level: 75 },
+  { name: "ASP.NET Core MVC", category: "backend", icon: "fas fa-layer-group", level: 72 },
+  { name: "Entity Framework Core", category: "backend", icon: "fas fa-database", level: 70 },
+  { name: "SQL Server", category: "backend", icon: "fas fa-database", level: 72 },
   { name: "Asyncio", category: "backend", icon: "fas fa-sync", level: 88 },
   { name: "Pydantic", category: "backend", icon: "fas fa-check-double", level: 90 },
   { name: "SQL / PostgreSQL", category: "backend", icon: "fas fa-database", level: 75 },
-  { name: "RESTful APIs", category: "backend", icon: "fas fa-server", level: 60 },
+  { name: "RESTful APIs", category: "backend", icon: "fas fa-server", level: 75 },
 
   // Frontend
   { name: "TypeScript", category: "frontend", icon: "fas fa-code", level: 40 },
@@ -79,14 +84,32 @@ export const skillsData = [
 ];
 
 export const experienceData = [
-  // {
-  //   role: "Full-Stack AI Engineer",
-  //   company: "Independent Freelancer | Remote",
-  //   date: "Present",
-  //   description:
-  //     "Delivered 7+ full-stack AI applications integrating multi-agent frameworks (LangGraph/DeepAgents), vector databases (Pinecone/FAISS/pgvector), and modern TypeScript/React frontends with 100% on-time completion. Engineered scalable FastAPI backends supporting sub-200ms response times.",
-  //   highlightStats: ["7+ AI Projects", "LangGraph & RAG", "FastAPI Microservices"],
-  // },
+  {
+    role: ".NET Intern",
+    company: "Augit Technologies | PCSIR Lahore",
+    date: "Present",
+    description:
+      "Learning and gaining practical experience in professional .NET web development. Building web applications using C#, ASP.NET Core MVC, Razor Views, and MVC architecture, alongside EF Core, SQL Server, and REST APIs.",
+    bullets: [
+      "Learning and developing web applications using C#, ASP.NET Core MVC, Razor Views, and the MVC architecture, with practical experience in controllers, models, routing, repositories, interfaces, data passing, and building dynamic web pages.",
+      "Developing foundational skills in .NET backend development, REST APIs, JSON-based data handling, Entity Framework Core, SQL/database integration, debugging, and writing structured, maintainable code as part of my progression toward becoming a professional .NET developer."
+    ],
+    skills: [
+      "C#",
+      "ASP.NET Core MVC",
+      "Razor Views",
+      "MVC Architecture",
+      "REST APIs",
+      "JSON",
+      "Routing",
+      "Repository Pattern",
+      "Interfaces",
+      "Entity Framework Core",
+      "SQL Server",
+      "Debugging & Problem Solving"
+    ],
+    highlightStats: ["C# & .NET Core", "ASP.NET Core MVC", "EF Core & SQL Server"],
+  },
   {
     role: "Artificial Intelligence Intern",
     company: "Revnix (SMC-PVT) LTD",
@@ -94,6 +117,7 @@ export const experienceData = [
     description:
       "Architected intelligent multi-modal agents including WhatsApp AI assistants, legal document risk analyzers (ContractLens), real-time campus surveillance violation systems, and e-commerce voice assistants.",
     highlightStats: ["Multi-Modal Voice AI", "Computer Vision (YOLO)", "Legal NLP Agents"],
+    skills: ["Python", "FastAPI", "LangChain / LangGraph", "YOLO / OpenCV", "RAG & Vector Search", "Cartesia / ElevenLabs"]
   },
 ];
 
