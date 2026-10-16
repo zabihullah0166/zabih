@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { personalInfo } from '../content';
 
+
 export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -48,14 +49,14 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero" style={{ position: "relative", overflow: "hidden" }}>
-      {/* Background Cyber Ambient Glows */}
+      {/* Subtle static ambient glows */}
       <div style={{
         position: "absolute",
         top: "-10%",
         left: "-10%",
-        width: "500px",
-        height: "500px",
-        background: "radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, rgba(0,0,0,0) 70%)",
+        width: "600px",
+        height: "600px",
+        background: "radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(0,0,0,0) 70%)",
         pointerEvents: "none",
         zIndex: 0
       }} />
@@ -63,9 +64,9 @@ export default function Hero() {
         position: "absolute",
         bottom: "-10%",
         right: "-5%",
-        width: "600px",
-        height: "600px",
-        background: "radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%)",
+        width: "700px",
+        height: "700px",
+        background: "radial-gradient(circle, rgba(139, 92, 246, 0.10) 0%, rgba(0,0,0,0) 70%)",
         pointerEvents: "none",
         zIndex: 0
       }} />
@@ -96,8 +97,8 @@ export default function Hero() {
             <a href="#contact" className="btn btn-secondary" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}>
               <i className="fas fa-envelope"></i> Contact Me
             </a>
-            <a href={personalInfo.resumePdf} className="btn btn-outline" download>
-              <i className="fas fa-file-download"></i> Resume PDF
+            <a href={personalInfo.resumePdf} className="btn btn-outline" download="ZabihUllahCV.pdf" target="_blank" rel="noopener noreferrer">
+              <i className="fas fa-file-download"></i> Download CV
             </a>
           </div>
         </div>

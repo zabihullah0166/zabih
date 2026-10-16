@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { testimonialsData } from '../content';
+import { useScrollReveal } from './useScrollReveal';
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const sectionRef = useScrollReveal();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -20,16 +22,16 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="testimonials section" id="testimonials">
+    <section className="testimonials section" id="testimonials" ref={sectionRef}>
       <div className="container">
-        <div className="section-header">
+        <div className="section-header reveal-item">
           <h2 className="section-title">
             What People <span className="highlight">Say</span>
           </h2>
           <div className="section-divider"></div>
         </div>
 
-        <div className="testimonials-slider">
+        <div className="testimonials-slider reveal-item reveal-item--delay-1">
           <div
             className="testimonial-track"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}

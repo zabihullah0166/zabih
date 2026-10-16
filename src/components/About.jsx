@@ -1,11 +1,14 @@
 import React from 'react';
 import { personalInfo } from '../content';
+import { useScrollReveal } from './useScrollReveal';
 
 export default function About() {
+  const sectionRef = useScrollReveal();
+
   return (
-    <section className="about section" id="about">
+    <section className="about section" id="about" ref={sectionRef}>
       <div className="container">
-        <div className="section-header">
+        <div className="section-header reveal-item">
           <h2 className="section-title">
             About <span className="highlight">Me</span>
           </h2>
@@ -13,13 +16,13 @@ export default function About() {
         </div>
 
         <div className="about-content">
-          <div className="about-image">
+          <div className="about-image reveal-item reveal-item--left">
             <div className="about-img-wrapper">
               <img src={personalInfo.swimImg} alt="Zabih Ullah" className="about-img" />
             </div>
           </div>
 
-          <div className="about-text">
+          <div className="about-text reveal-item reveal-item--right">
             <h3>{personalInfo.role}</h3>
 
             {personalInfo.bio.map((paragraph, index) => (

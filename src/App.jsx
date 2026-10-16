@@ -11,6 +11,8 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import ParticleBackground from './components/ParticleBackground';
+
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -38,6 +40,8 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Full-page ambient particle layer – fixed, behind everything */}
+      <ParticleBackground />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Hero />

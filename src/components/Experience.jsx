@@ -1,11 +1,13 @@
 import React from 'react';
 import { experienceData } from '../content';
+import { useScrollReveal } from './useScrollReveal';
 
 export default function Experience() {
+  const sectionRef = useScrollReveal();
   return (
-    <section className="experience section" id="experience">
+    <section className="experience section" id="experience" ref={sectionRef}>
       <div className="container">
-        <div className="section-header">
+        <div className="section-header reveal-item">
           <h2 className="section-title">
             Work <span className="highlight">Experience</span>
           </h2>
@@ -14,7 +16,7 @@ export default function Experience() {
 
         <div className="timeline">
           {experienceData.map((item, index) => (
-            <div className="timeline-item" key={index}>
+            <div className={`timeline-item reveal-item reveal-item--delay-${Math.min(index + 1, 5)}`} key={index}>
               <div className="timeline-dot"></div>
               <div className="timeline-date">{item.date}</div>
               <div className="timeline-content">

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { personalInfo, contactEndpoint } from '../content';
+import { useScrollReveal } from './useScrollReveal';
 
 export default function Contact({ onShowToast }) {
+  const sectionRef = useScrollReveal();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -81,9 +83,9 @@ export default function Contact({ onShowToast }) {
   };
 
   return (
-    <section className="contact section" id="contact">
+    <section className="contact section" id="contact" ref={sectionRef}>
       <div className="container">
-        <div className="section-header">
+        <div className="section-header reveal-item">
           <h2 className="section-title">
             Get In <span className="highlight">Touch</span>
           </h2>
@@ -92,7 +94,7 @@ export default function Contact({ onShowToast }) {
         </div>
 
         <div className="contact-content">
-          <div className="contact-info">
+          <div className="contact-info reveal-item reveal-item--left">
             <p className="contact-intro">
               I'm currently available for freelance, AI agent contracts, and full-time remote positions across
               any timezone. Click email or phone below to instantly copy to clipboard!

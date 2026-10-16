@@ -1,11 +1,13 @@
 import React from 'react';
 import { educationData } from '../content';
+import { useScrollReveal } from './useScrollReveal';
 
 export default function Education() {
+  const sectionRef = useScrollReveal();
   return (
-    <section className="education section" id="education">
+    <section className="education section" id="education" ref={sectionRef}>
       <div className="container">
-        <div className="section-header">
+        <div className="section-header reveal-item">
           <h2 className="section-title">
             My <span className="highlight">Education</span>
           </h2>
@@ -14,7 +16,7 @@ export default function Education() {
 
         <div className="education-grid">
           {educationData.map((item, index) => (
-            <div className="edu-card" key={index}>
+            <div className={`edu-card reveal-item reveal-item--scale reveal-item--delay-${Math.min(index + 1, 5)}`} key={index}>
               <div className="edu-icon">
                 <i className={item.icon}></i>
               </div>

@@ -191,122 +191,332 @@ img {
   transform: translateY(-2px);
 }
 
-/* ====== NAVBAR ====== */
-.navbar {
+/* ====== PILL NAVBAR ====== */
+
+/* Outer wrapper — fixed, full-width, houses the centered pill */
+.pill-navbar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: 1000;
-  background: var(--nav-bg);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  padding: 14px 20px 0;
+  pointer-events: none; /* allow clicks to pass through empty space */
+  transition: padding 0.3s ease;
 }
 
-.navbar.scrolled {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.pill-navbar--scrolled {
+  padding-top: 10px;
 }
 
-.nav-container {
+/* The actual pill container */
+.pill-navbar__inner {
+  pointer-events: all;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
-}
-
-.nav-logo {
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: var(--accent);
-  letter-spacing: 1px;
-}
-
-.nav-list {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-link {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: color 0.2s ease;
-  position: relative;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--text-primary);
-}
-
-.nav-link.active::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 0;
+  gap: 12px;
   width: 100%;
-  height: 2px;
-  background: var(--accent);
-  border-radius: 2px;
+  max-width: 1140px;
+  height: 62px;
+  padding: 0 14px 0 14px;
+  background: rgba(3, 7, 18, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35), 0 0 0 0.5px rgba(255,255,255,0.04) inset;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.nav-actions {
+.pill-navbar--scrolled .pill-navbar__inner {
+  background: rgba(3, 7, 18, 0.92);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.06);
+}
+
+/* ── Logo ── */
+.pill-navbar__logo {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
-.theme-toggle {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+.pill-navbar__logo-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  box-shadow: 0 0 14px var(--accent-glow);
 }
 
-.theme-toggle:hover {
+.pill-navbar__logo-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.pill-navbar__logo-text small {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* ── Centre nav tabs capsule ── */
+.pill-navbar__tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 100px;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.pill-navbar__tab {
+  position: relative;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease, background 0.25s ease;
+  cursor: pointer;
+}
+
+.pill-navbar__tab:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pill-navbar__tab--active {
+  color: var(--text-primary) !important;
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.12);
+}
+
+/* ── Right-side actions ── */
+.pill-navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Theme toggle icon button */
+.pill-navbar__theme-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.pill-navbar__theme-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
   border-color: var(--accent);
   color: var(--accent);
-  transform: rotate(15deg);
+  transform: rotate(20deg);
 }
 
-.hamburger {
+/* Contact CTA — gradient pill */
+.pill-navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+  cursor: pointer;
+}
+
+.pill-navbar__cta:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(59, 130, 246, 0.5);
+  filter: brightness(1.08);
+}
+
+.pill-navbar__cta-arrow {
+  font-size: 0.72rem;
+  transition: transform 0.2s ease;
+}
+
+.pill-navbar__cta:hover .pill-navbar__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* Hamburger — hidden on desktop */
+.pill-navbar__hamburger {
   display: none;
+  flex-direction: column;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
-  flex-direction: column;
-  gap: 6px;
-  padding: 4px;
+  padding: 6px;
+  border-radius: 8px;
 }
 
-.hamburger span {
-  width: 26px;
+.pill-navbar__hamburger span {
+  display: block;
+  width: 22px;
   height: 2px;
   background: var(--text-primary);
+  border-radius: 2px;
   transition: all 0.3s ease;
+  transform-origin: center;
 }
 
-.hamburger.active span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
+.pill-navbar__hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
-
-.hamburger.active span:nth-child(2) {
+.pill-navbar__hamburger.open span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
+}
+.pill-navbar__hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
+/* ── Light-mode overrides ── */
+[data-theme="light"] .pill-navbar__inner {
+  background: rgba(248, 250, 252, 0.88);
+  border-color: rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
+
+[data-theme="light"] .pill-navbar__tabs {
+  background: rgba(226, 232, 240, 0.7);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .pill-navbar__tab--active {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+[data-theme="light"] .pill-navbar__theme-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+}
+
+/* ── Mobile slide-in drawer ── */
+.pill-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(320px, 80vw);
+  height: 100dvh;
+  background: rgba(3, 7, 18, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  z-index: 999;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 100px 32px 40px;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.pill-mobile-menu--open {
+  right: 0 !important;
+}
+
+.pill-mobile-menu nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pill-mobile-menu__link {
+  display: block;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.pill-mobile-menu__link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.pill-mobile-menu__link.active {
+  color: var(--text-primary);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+.pill-mobile-menu__cta {
+  margin-top: 20px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+  color: #ffffff !important;
+  border-radius: 100px;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.pill-mobile-menu__cta:hover {
+  filter: brightness(1.1);
+  transform: none;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%) !important;
+}
+
+/* Backdrop behind mobile drawer */
+.pill-mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(2px);
+}
+
 
 /* ====== HERO SECTION ====== */
 .hero {
@@ -1183,25 +1393,27 @@ img {
 }
 
 @media (max-width: 768px) {
-  .nav-list {
-    position: fixed;
-    top: 80px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background: var(--bg-primary);
-    flex-direction: column;
-    justify-content: center;
-    gap: 28px;
-    transition: left 0.3s ease;
+  /* Show hamburger, hide tabs & CTA text */
+  .pill-navbar__tabs {
+    display: none;
   }
 
-  .nav-menu.active .nav-list {
-    left: 0;
+  .pill-navbar__cta {
+    display: none;
   }
 
-  .hamburger {
+  .pill-navbar__hamburger {
     display: flex;
+  }
+
+  /* Show mobile drawer */
+  .pill-mobile-menu {
+    display: flex;
+  }
+
+  /* Show backdrop */
+  .pill-mobile-backdrop {
+    display: block;
   }
 
   .hero-name {
@@ -1604,39 +1816,35 @@ img {
     font-size: 1.8rem;
   }
 
-  /* Navbar */
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    height: 100vh;
-    background: var(--bg-primary);
-    flex-direction: column;
-    padding-top: 80px;
-    transition: right 0.3s ease;
-    z-index: 999;
-    border-left: 1px solid var(--border-color);
-  }
 
-  .nav-menu.active {
-    right: 0;
-  }
+  /* Remove old nav-menu rules – drawer handled by pill-mobile-menu */
 
-  .nav-list {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .hamburger {
-    display: flex;
-  }
 
   /* Buttons */
   .btn {
     font-size: 0.85rem;
     padding: 10px 20px;
+  }
+
+  /* Pill navbar on tablet/small: hide logo text, keep logo box */
+  .pill-navbar__logo-text {
+    display: none;
+  }
+
+  .pill-navbar__tabs {
+    display: none;
+  }
+
+  .pill-navbar__hamburger {
+    display: flex;
+  }
+
+  .pill-mobile-menu {
+    display: flex;
+  }
+
+  .pill-mobile-backdrop {
+    display: block;
   }
 }
 
@@ -1661,5 +1869,192 @@ img {
 
   .section-title {
     font-size: 1.5rem;
+  }
+}
+
+/* ====== MEDIUM SCREENS: compact pill navbar ====== */
+@media (max-width: 1020px) and (min-width: 769px) {
+  /* Reduce tab padding on medium screens */
+  .pill-navbar__tab {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+
+  .pill-navbar__logo-text small {
+    display: none;
+  }
+
+  .pill-navbar__inner {
+    gap: 8px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 769px) {
+  /* Hide tabs on smaller medium, show hamburger */
+  .pill-navbar__tabs {
+    display: none;
+  }
+
+  .pill-navbar__hamburger {
+    display: flex;
+  }
+
+  .pill-mobile-menu {
+    display: flex;
+  }
+
+  .pill-mobile-backdrop {
+    display: block;
+  }
+}
+
+/* ====== REDUCED MOTION ====== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Canvas particle layer is hidden via JS when reduced-motion is detected */
+}
+
+/* ====== SCROLL REVEAL ANIMATIONS ====== */
+
+/**
+ * Base hidden state – items start invisible & shifted down 30px.
+ * Class "revealed" is added by the IntersectionObserver in useScrollReveal.js
+ * Only applied when JS has loaded; no flash of invisible content.
+ */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger helpers – add class alongside reveal-item */
+.reveal-item--delay-1 { transition-delay: 0.08s; }
+.reveal-item--delay-2 { transition-delay: 0.16s; }
+.reveal-item--delay-3 { transition-delay: 0.24s; }
+.reveal-item--delay-4 { transition-delay: 0.32s; }
+.reveal-item--delay-5 { transition-delay: 0.40s; }
+
+/* Slide from left variant */
+.reveal-item--left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-item--left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right variant */
+.reveal-item--right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-item--right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale-up variant for cards */
+.reveal-item--scale {
+  opacity: 0;
+  transform: scale(0.93) translateY(20px);
+  transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-item--scale.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ====== SKILL BAR ANIMATED FILL ====== */
+
+/*
+ * Bars start at width:0, animate to their CSS var --target-width
+ * when .animate-bar is added by the IntersectionObserver in Skills.jsx
+ */
+.skill-progress {
+  width: 0% !important;             /* start collapsed */
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.skill-progress.animate-bar {
+  width: var(--skill-target-width) !important;  /* JS sets this var */
+}
+
+/* Accessibility: skip reveal animation if motion is reduced */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item,
+  .reveal-item--left,
+  .reveal-item--right,
+  .reveal-item--scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .skill-progress {
+    width: var(--skill-target-width) !important;
+    transition: none !important;
+  }
+}
+
+/* ====== ELEGANT BLUE ARROW CURSOR ====== */
+
+/* Desktop pointer devices: clean, responsive blue arrow matching screenshot */
+@media (pointer: fine) {
+  html,
+  body {
+    cursor: url("/cursor.svg") 3 2,
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M3.8 2.6L5.2 20.2L9.6 15L17.2 15.8L3.8 2.6Z' fill='%232563EB' stroke='%232563EB' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 3 2,
+            auto;
+  }
+
+  /* Interactive / clickable elements */
+  a,
+  button,
+  [role="button"],
+  .btn,
+  .filter-btn,
+  .pill-navbar__tab,
+  .pill-navbar__logo,
+  .project-card,
+  .project-image,
+  .testimonial-btn,
+  .testimonial-dot,
+  .edu-verify,
+  .scroll-to-top,
+  .scroll-indicator,
+  .theme-toggle,
+  .contact-item {
+    cursor: url("/cursor.svg") 3 2,
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M3.8 2.6L5.2 20.2L9.6 15L17.2 15.8L3.8 2.6Z' fill='%232563EB' stroke='%232563EB' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 3 2,
+            pointer !important;
+  }
+
+  /* Text inputs: preserve standard text selection */
+  input,
+  textarea,
+  [contenteditable="true"] {
+    cursor: text !important;
   }
 }

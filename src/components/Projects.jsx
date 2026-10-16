@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { projectsData } from '../content';
+import { useScrollReveal } from './useScrollReveal';
 
 export default function Projects({ onSelectProject }) {
   const [activeFilter, setActiveFilter] = useState('all');
+  const sectionRef = useScrollReveal();
 
   const filterTabs = [
     { id: 'all', label: 'All Projects' },
@@ -15,9 +17,9 @@ export default function Projects({ onSelectProject }) {
     : projectsData.filter((p) => p.category === activeFilter);
 
   return (
-    <section className="projects section" id="projects">
+    <section className="projects section" id="projects" ref={sectionRef}>
       <div className="container">
-        <div className="section-header">
+        <div className="section-header reveal-item">
           <h2 className="section-title">
             Production <span className="highlight">AI Projects</span>
           </h2>
@@ -26,7 +28,7 @@ export default function Projects({ onSelectProject }) {
         </div>
 
         {/* Filter Pills */}
-        <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginBottom: "40px", flexWrap: "wrap" }}>
+        <div className="reveal-item reveal-item--delay-1" style={{ display: "flex", justifyContent: "center", gap: "10px", marginBottom: "40px", flexWrap: "wrap" }}>
           {filterTabs.map((tab) => (
             <button
               key={tab.id}
@@ -51,7 +53,7 @@ export default function Projects({ onSelectProject }) {
 
         <div className="projects-grid" id="projectsGrid">
           {filteredProjects.map((project, index) => (
-            <div className="project-card" key={index} style={{ backdropFilter: "blur(16px)" }}>
+            <div className={`project-card reveal-item reveal-item--scale reveal-item--delay-${Math.min(index % 3 + 1, 5)}`} key={index} style={{ backdropFilter: "blur(16px)" }}>
               <div className="project-image" onClick={() => onSelectProject(project)} style={{ cursor: "pointer" }}>
                 <img src={project.image} alt={project.title} className="project-img" />
               </div>
